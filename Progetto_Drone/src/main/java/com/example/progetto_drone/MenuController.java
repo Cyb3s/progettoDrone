@@ -15,7 +15,7 @@ public class MenuController {
     private ChoiceBox<?> chb_anno;
 
     @FXML
-    private CheckBox ckb_conclusi;
+    private CheckBox ckb_continua;
 
     @FXML
     private CheckBox ckb_inCorso;
