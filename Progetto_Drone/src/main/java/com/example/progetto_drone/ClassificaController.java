@@ -1,4 +1,5 @@
 package com.example.progetto_drone;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,11 +38,15 @@ public class ClassificaController {
 
     public void initialize() {}
 
-    public void onSalvaGara() {}
+    @FXML
+    void onAvviaCrnm(ActionEvent event) {}
 
-    public void onProssima() {}
+    @FXML
+    void onFermaCrnm(ActionEvent event) {}
 
-    public void onAvviaCrnm() {}
+    @FXML
+    void onProssima(ActionEvent event) {}
 
-    public void onFermaCrnm() {}
+    @FXML
+    void onSalvaGara(ActionEvent event) {}
 }
