@@ -11,7 +11,7 @@ public class ChangeWindow {
         try {
             Stage stage=new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(ChangeWindow.class.getResource(fxml));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();

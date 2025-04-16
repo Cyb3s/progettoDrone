@@ -1,5 +1,6 @@
 package com.example.progetto_drone;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -27,6 +28,21 @@ public class NuovoTrofeoController {
 
     @FXML
     private TextField text_nome;
+
+    @FXML
+    void initialize(){
+        //da implementare inizializazione
+    }
+
+    @FXML
+    void onAnnulla(ActionEvent event) {
+        //da implementare
+    }
+
+    @FXML
+    void onConferma(ActionEvent event) {
+        //da impplementare
+    }
 
 }
 
