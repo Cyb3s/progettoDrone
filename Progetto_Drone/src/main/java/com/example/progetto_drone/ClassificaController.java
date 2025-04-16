@@ -21,21 +21,27 @@ public class ClassificaController {
     private Label lbl_titolo;
 
     @FXML
-    private TableColumn<?, ?> tbc_nome;
+    private TableColumn<?, String> tbc_nome;
 
     @FXML
-    private TableColumn<?, ?> tbc_numLanci;
+    private TableColumn<?, String> tbc_numLanci;
 
     @FXML
-    private TableColumn<?, ?> tbc_penalita;
+    private TableColumn<?, Integer> tbc_penalita;
 
     @FXML
-    private TableColumn<?, ?> tbc_punti;
+    private TableColumn<?, String> tbc_punti;
 
     @FXML
-    private TableColumn<?, ?> tbc_tempo;
+    private TableColumn<?, String> tbc_tempo;
 
-    public void initialize() {
+    public void initialize() {}
 
-    }
+    public void onSalvaGara() {}
+
+    public void onProssima() {}
+
+    public void onAvviaCrnm() {}
+
+    public void onFermaCrnm() {}
 }
