@@ -12,7 +12,7 @@ public class MenuController {
     private Button btn_visualizzaVincitori;
 
     @FXML
-    private ChoiceBox<?> chb_anno;
+    private ChoiceBox<String> chb_anno;
 
     @FXML
     private CheckBox ckb_continua;
@@ -31,6 +31,11 @@ public class MenuController {
 
     @FXML
     private TextField txf_ricerca;
+
+    @FXML
+    public void initialize(){
+
+    }
 
     @FXML
     void onNuovoTrofeo(ActionEvent event) {

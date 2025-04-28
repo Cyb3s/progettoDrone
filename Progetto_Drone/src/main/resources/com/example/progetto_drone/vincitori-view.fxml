@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.VincitoriController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f7a7a2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.VincitoriController">
    <children>
-      <Label layoutX="215.0" layoutY="14.0" text="Vincitori del trofeo">
+      <Label layoutX="164.0" layoutY="12.0" text="Vincitori del trofeo">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <TextField fx:id="txf_primoClassificato" layoutX="477.0" layoutY="97.0" prefHeight="25.0" prefWidth="82.0" />
@@ -27,5 +26,25 @@
             <TableColumn fx:id="tbc_puntiTotali" prefWidth="94.0" text="Punti Totali" />
         </columns>
       </TableView>
+      <Label layoutX="404.0" layoutY="66.0" text="🥇" textFill="GOLD">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="493.0" layoutY="177.0" text="🥈" textFill="#d0d2d3">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="404.0" layoutY="264.0" text="🥉" textFill="#cd7f32">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label layoutX="379.0" layoutY="-7.0" prefHeight="52.0" prefWidth="50.0" text="🏅">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
