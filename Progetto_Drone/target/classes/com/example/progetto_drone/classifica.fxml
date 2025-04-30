@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="14.0" layoutY="33.0" prefHeight="313.0" prefWidth="572.0">
+        <columns>
+            <TableColumn fx:id="tbc_nome" prefWidth="114.0" text="NOME" />
+            <TableColumn fx:id="tbc_numLanci" prefWidth="114.0" text="NUMERO LANCI" />
+            <TableColumn fx:id="tbc_tempo" prefWidth="114.0" text="TEMPO" />
+            <TableColumn fx:id="tbc_penalita" prefWidth="114.0" text="PENALITA'" />
+            <TableColumn fx:id="tbc_punti" prefWidth="114.0" text="PUNTI" />
+        </columns>
+      </TableView>
+      <Button fx:id="btn_salvaGara" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#onSalvaGara" prefHeight="31.0" prefWidth="75.0" text="Salva Gara" />
+      <Button fx:id="btn_prossimaGara" layoutX="98.0" layoutY="355.0" mnemonicParsing="false" onAction="#onProssima" prefHeight="31.0" prefWidth="92.0" text="Prossima Gara" />
+      <Button fx:id="btn_fermaCronometro" layoutX="320.0" layoutY="355.0" mnemonicParsing="false" onAction="#onFermaCrnm" prefHeight="31.0" prefWidth="120.0" text="Ferma Cronometro" />
+      <Label fx:id="lbl_titolo" layoutX="246.0" layoutY="3.0" text="CLASSIFICA">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_avviaCronometro" layoutX="194.0" layoutY="355.0" mnemonicParsing="false" onAction="#onAvviaCrnm" prefHeight="31.0" prefWidth="120.0" text="Avvia Cronometro" />
+      <Button fx:id="btn_lancio" layoutX="447.0" layoutY="355.0" mnemonicParsing="false" onAction="#onLancia" prefHeight="31.0" prefWidth="75.0" text="Lancio" />
+      <Button fx:id="btn_homePage" layoutX="548.0" layoutY="355.0" mnemonicParsing="false" onAction="#onTornaHome" prefHeight="31.0" prefWidth="38.0" text="🏠" />
+   </children>
+</Pane>
