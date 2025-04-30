@@ -3,6 +3,7 @@ package com.example.progetto_drone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class MenuController {
     @FXML
@@ -40,7 +41,9 @@ public class MenuController {
 
     @FXML
     void onNuovoTrofeo(ActionEvent event) {
-
+        ChangeWindow.changeWindow("nuovoTrofeo.fxml","NUovo Trofeo");
+        Stage ss=(Stage) btn_nuovoTrofeo.getScene().getWindow();
+        ss.close();
     }
 
     @FXML
