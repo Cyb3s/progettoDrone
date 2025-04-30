@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,9 +14,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txf_primoClassificato" layoutX="477.0" layoutY="97.0" prefHeight="25.0" prefWidth="82.0" />
-      <TextField fx:id="txf_secondoClassificato" layoutX="385.0" layoutY="188.0" prefHeight="25.0" prefWidth="82.0" />
-      <TextField fx:id="txf_terzoClassificato" layoutX="477.0" layoutY="272.0" prefHeight="25.0" prefWidth="82.0" />
       <Button fx:id="btn_indietro" layoutX="271.0" layoutY="346.0" mnemonicParsing="false" onAction="#onIndietro" text="Indietro" />
       <TableView fx:id="tbw_tabella" layoutX="34.0" layoutY="82.0" prefHeight="237.0" prefWidth="339.0">
         <columns>
@@ -44,6 +40,21 @@
       <Label layoutX="379.0" layoutY="-7.0" prefHeight="52.0" prefWidth="50.0" text="🏅">
          <font>
             <Font size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_primoClassificato" layoutX="463.0" layoutY="95.0" prefHeight="31.0" prefWidth="111.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_secondoClassificato" layoutX="382.0" layoutY="198.0" prefHeight="31.0" prefWidth="111.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_terzoClassificato" layoutX="449.0" layoutY="282.0" prefHeight="31.0" prefWidth="111.0">
+         <font>
+            <Font size="16.0" />
          </font>
       </Label>
    </children>

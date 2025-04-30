@@ -34,6 +34,7 @@ public class MenuController {
 
     @FXML
     public void initialize(){
+        //gestione della tabella
 
     }
 

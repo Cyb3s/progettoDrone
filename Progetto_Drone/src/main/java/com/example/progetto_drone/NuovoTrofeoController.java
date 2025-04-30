@@ -32,6 +32,7 @@ public class NuovoTrofeoController {
     @FXML
     void initialize(){
         //da implementare inizializazione
+        
     }
 
     @FXML

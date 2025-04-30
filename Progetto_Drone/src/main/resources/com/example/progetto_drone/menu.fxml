@@ -17,7 +17,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="txf_ricerca" layoutX="83.0" layoutY="56.0" prefHeight="25.0" prefWidth="133.0" />
+      <TextField fx:id="txf_ricerca" layoutX="83.0" layoutY="56.0" prefHeight="25.0" prefWidth="133.0" promptText="Ricerca..." />
       <ChoiceBox fx:id="chb_anno" layoutX="268.0" layoutY="56.0" prefWidth="150.0" style="-fx-background-color: d8c988;" />
       <TableView fx:id="tbw_tabella" layoutX="83.0" layoutY="111.0" prefHeight="200.0" prefWidth="356.0">
         <columns>
