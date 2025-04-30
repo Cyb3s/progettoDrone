@@ -1,10 +1,14 @@
+
 package com.example.progetto_drone;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class NuovoTrofeoController {
 
@@ -13,6 +17,9 @@ public class NuovoTrofeoController {
 
     @FXML
     private Button button_conferma;
+
+    @FXML
+    private CheckBox choiceScarta;
 
     @FXML
     private ChoiceBox<?> choice_anno;
@@ -32,18 +39,28 @@ public class NuovoTrofeoController {
     @FXML
     void initialize(){
         //da implementare inizializazione
-        
+
     }
 
     @FXML
     void onAnnulla(ActionEvent event) {
-        //da implementare
+        ChangeWindow.changeWindow("menu.fxml","Menu");
+        Stage ss=(Stage)button_annulla.getScene().getWindow();
+        ss.close();
     }
 
     @FXML
     void onConferma(ActionEvent event) {
-        //da impplementare
+        ChangeWindow.changeWindow("partecipanti.fxml","Partecipanti");
+        Stage ss=(Stage)button_annulla.getScene().getWindow();
+        ss.close();
+    }
+
+    @FXML
+    void onScarta(ActionEvent event) {
+        //da implementare
     }
 
 }
+
 
