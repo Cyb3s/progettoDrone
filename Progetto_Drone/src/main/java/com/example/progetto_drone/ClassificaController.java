@@ -5,13 +5,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+
+import java.io.IOException;
+import java.util.*;
 
 public class ClassificaController {
     @FXML
     private Button btn_avviaCronometro;
+
+    @FXML
+    private Button btn_homePage;
+
+    @FXML
+    private Button btn_lancio;
 
     @FXML
     private Button btn_fermaCronometro;
@@ -29,21 +42,23 @@ public class ClassificaController {
     private TableColumn<Partecipante, String> tbc_nome;
 
     @FXML
-    private TableColumn<Partecipante, String> tbc_numLanci;
+    private TableColumn<Lancio, Integer> tbc_numLanci;
 
     @FXML
-    private TableColumn<Partecipante, Integer> tbc_penalita;
+    private TableColumn<Lancio, Integer> tbc_penalita;
 
     @FXML
-    private TableColumn<Partecipante, String> tbc_punti;
+    private TableColumn<Lancio, String> tbc_punti;
 
     @FXML
-    private TableColumn<Partecipante, String> tbc_tempo;
+    private TableColumn<Lancio, String> tbc_tempo;
 
     @FXML
     private TableView<Partecipante> tableView;
 
     private ObservableList<Partecipante> listaPartecipanti = FXCollections.observableArrayList();
+    private Map<Partecipante, Lancio> lanciPerPartecipante = new HashMap<>();
+
 
     private long tempoIniziale;
     private AnimationTimer timer;
@@ -53,7 +68,7 @@ public class ClassificaController {
         tableView.setEditable(true);
 
         tbc_nome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
-        tbc_numLanci.setCellValueFactory(cellData -> cellData.getValue().numLanciProperty());
+        tbc_numLanci.setCellValueFactory(cellData -> cellData.getValue().numLanciProperty().asObject());
         tbc_penalita.setCellValueFactory(cellData -> cellData.getValue().penalitaProperty().asObject());
         tbc_punti.setCellValueFactory(cellData -> cellData.getValue().puntiProperty());
         tbc_tempo.setCellValueFactory(cellData -> cellData.getValue().tempoProperty());
@@ -62,14 +77,14 @@ public class ClassificaController {
 
         tbc_tempo.setCellFactory(TextFieldTableCell.forTableColumn());
         tbc_tempo.setOnEditCommit(event -> {
-            Partecipante partecipante = event.getRowValue();
-            partecipante.tempoProperty().set(event.getNewValue());
+            Lancio lancio = event.getRowValue();
+            lancio.tempoProperty().set(event.getNewValue());
         });
 
         tbc_penalita.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         tbc_penalita.setOnEditCommit(event -> {
-            Partecipante partecipante = event.getRowValue();
-            partecipante.penalitaProperty().set(event.getNewValue());
+            Lancio lancio = event.getRowValue();
+            lancio.penalitaProperty().set(event.getNewValue());
         });
 
         timer = new AnimationTimer() {
@@ -79,6 +94,10 @@ public class ClassificaController {
                 lbl_titolo.setText(formattaTempo(milliTrascorsi));
             }
         };
+
+        Partecipante p = new Partecipante("Mario", "Rossi");
+        listaPartecipanti.add(p);
+        lanciPerPartecipante.put(p, new Lancio(p));
     }
 
     @FXML
@@ -99,6 +118,30 @@ public class ClassificaController {
     }
 
     @FXML
+    void onLancio(ActionEvent event) {
+        Partecipante p = tableView.getSelectionModel().getSelectedItem();
+        if (p != null) {
+            Lancio lancio = lanciPerPartecipante.get(p);
+            lancio.aggiungiTempo(System.currentTimeMillis() - tempoIniziale);
+
+            tableView.refresh();
+        }
+
+    }
+
+    @FXML
+    void onHomePage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btn_homePage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void onProssima(ActionEvent event) {
         lbl_titolo.setText("Nuova Gara");
         listaPartecipanti.clear();
@@ -106,8 +149,6 @@ public class ClassificaController {
 
     @FXML
     void onSalvaGara(ActionEvent event) {
-        //listaPartecipanti.add(new Partecipante("nome", "cognome", "3", 5, "90", lbl_titolo.getText()));
-        //Da rivedere...
     }
 
     private String formattaTempo(long tempo) {
