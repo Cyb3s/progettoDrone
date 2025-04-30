@@ -19,6 +19,12 @@ public class ClassificaController {
     private Button btn_salvaGara;
 
     @FXML
+    private Button btn_homePage;
+
+    @FXML
+    private Button btn_lancio;
+
+    @FXML
     private Label lbl_titolo;
 
     @FXML
@@ -49,4 +55,10 @@ public class ClassificaController {
 
     @FXML
     void onSalvaGara(ActionEvent event) {}
+
+    @FXML
+    void onLancia(ActionEvent event) {}
+
+    @FXML
+    void onTornaHome(ActionEvent event) {}
 }
