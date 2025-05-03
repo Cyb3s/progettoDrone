@@ -145,7 +145,21 @@ public class MenuController {
             });
         });
 
-        //da aggiungere-> se clicco in una riga e il trofeo non è concluso lo porto al salvataggio dalla gara corrente
+        // Se clicco un torneo non concluso mi manda alla prossima gara del trofeo
+        tbw_tabella.setOnMouseClicked(event -> {
+            // Verifica se una riga è selezionata
+            if (tbw_tabella.getSelectionModel().getSelectedItem() != null) {
+                Trofeo selezionato = tbw_tabella.getSelectionModel().getSelectedItem();
+
+                // Controlla se il trofeo selezionato non è concluso
+                if (selezionato.isInCorso()) {
+                    // Apre la finestra di salvataggio gara
+                    ChangeWindow.changeWindow("classifica.fxml", "Nuova Gara");
+                    Stage stage = (Stage) tbw_tabella.getScene().getWindow();
+                    stage.close();
+                }
+            }
+        });
     }
 
     @FXML
