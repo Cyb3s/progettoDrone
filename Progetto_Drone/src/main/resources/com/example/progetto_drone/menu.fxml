@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.controller.MenuController">
    <children>
-      <Label layoutX="272.0" layoutY="15.0" text="Trofei">
+      <Label layoutX="261.0" layoutY="15.0" text="TROFEI">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

@@ -42,6 +42,9 @@ public class VincitoriController {
         //settare le label primo, secondo e terzo con il nome e cognome del vincitore
         //scrivere la classifica nella tabella
 
+        // Ordinare la lista in base ai punti (dal più alto al più basso)
+        /*classifica*/.sort((t1, t2) -> Integer.compare(t2.getPuntiTotali(), t1.getPuntiTotali()));
+
         // Popolare la TableView con la classifica completa
         tbw_tabella.setItems(FXCollections.observableArrayList(/*classifica*/));
 
@@ -50,12 +53,22 @@ public class VincitoriController {
         tbc_cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         tbc_puntiTotali.setCellValueFactory(new PropertyValueFactory<>("puntiTotali"));
 
+        // visualizzare il primo, secondo e terzo classificato
+        if (!/*classifica*/.isEmpty()) {
+            txf_primoClassificato.setText(/*classifica*/.get(0).getNome() + " " + /*classifica*/.get(0).getCognome());
+        }
+        if (partecipanti.size() > 1) {
+            txf_secondoClassificato.setText(/*classifica*/.get(1).getNome() + " " + /*classifica*/.get(1).getCognome());
+        }
+        if (partecipanti.size() > 2) {
+            txf_terzoClassificato.setText(/*classifica*/.get(2).getNome() + " " + /*classifica*/.get(2).getCognome());
+        }
 
     }
 
     @FXML
     void onIndietro(ActionEvent event) {
-        ChangeWindow.changeWindow(" menu.fxml","Menu' Trofei");
+        ChangeWindow.changeWindow("menu.fxml","Menu' Trofei");
         Stage ss=(Stage) btn_indietro.getScene().getWindow();
         ss.close();
     }
