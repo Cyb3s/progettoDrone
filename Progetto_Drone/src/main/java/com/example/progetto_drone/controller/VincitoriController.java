@@ -1,4 +1,4 @@
-package com.example.progetto_drone;
+package com.example.progetto_drone.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

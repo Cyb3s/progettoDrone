@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: faf8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.controller.ClassificaController">
    <children>
-      <TableView layoutX="14.0" layoutY="33.0" prefHeight="313.0" prefWidth="572.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="33.0" prefHeight="313.0" prefWidth="572.0">
         <columns>
             <TableColumn fx:id="tbc_nome" prefWidth="114.0" text="NOME" />
             <TableColumn fx:id="tbc_numLanci" prefWidth="114.0" text="NUMERO LANCI" />

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.progetto_drone.MenuController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: faf8f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: faf8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.controller.MenuController">
    <children>
       <Label layoutX="275.0" layoutY="14.0" text="Trofei">
          <font>
@@ -26,8 +25,8 @@
           <TableColumn fx:id="tbc_data" prefWidth="175.0" text="Data" />
         </columns>
       </TableView>
-      <CheckBox fx:id="ckb_inCorso" layoutX="472.0" layoutY="48.0" mnemonicParsing="false" text="Trofei in corso" />
-      <CheckBox fx:id="ckb_continua" layoutX="472.0" layoutY="81.0" mnemonicParsing="false" text="Trofei conclusi" />
+      <CheckBox fx:id="ckb_inCorso" layoutX="472.0" layoutY="48.0" mnemonicParsing="false" onAction="#onInCorso" selected="true" text="Trofei in corso" />
+      <CheckBox fx:id="ckb_conclusi" layoutX="472.0" layoutY="81.0" mnemonicParsing="false" onAction="#onConclusi" text="Trofei conclusi" />
       <Button fx:id="btn_visualizzaVincitori" layoutX="105.0" layoutY="347.0" mnemonicParsing="false" onAction="#onVisualizzaVincitori" style="-fx-background-color: d8c988;" text="Visualizza i vincitori" />
       <Button fx:id="btn_nuovoTrofeo" layoutX="366.0" layoutY="347.0" mnemonicParsing="false" onAction="#onNuovoTrofeo" style="-fx-background-color: d8c988;" text="Crea nuovo trofeo" />
       <Label layoutX="232.0" layoutY="6.0" prefWidth="36.0" text="🏆" textFill="GOLD">

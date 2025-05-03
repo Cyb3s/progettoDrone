@@ -1,5 +1,6 @@
-package com.example.progetto_drone;
+package com.example.progetto_drone.controller;
 
+import com.example.progetto_drone.ChangeWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

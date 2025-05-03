@@ -8,22 +8,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="339.0" prefWidth="511.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.NuovoTrofeoController">
+<VBox prefHeight="339.0" prefWidth="511.0" spacing="20.0" style="-fx-background-color: faf8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_drone.controller.NuovoTrofeoController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Label text="Creazione del trofeo" />
+      <Label text="Creazione del trofeo">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <VBox prefHeight="100.0" prefWidth="328.0" spacing="10.0">
                <children>
-                  <Label text="Nome Trofeo" />
+                  <HBox prefHeight="28.0" prefWidth="328.0">
+                     <children>
+                        <Label text="Nome Trofeo" />
+                        <Label text="                           " />
+                        <Label text="Inserisci anno" />
+                     </children>
+                  </HBox>
                   <HBox prefHeight="73.0" prefWidth="301.0" spacing="10.0">
                      <children>
                         <TextField fx:id="text_nome" promptText="Nome" />
-                        <ChoiceBox fx:id="choice_anno" prefWidth="150.0" />
+                        <TextField fx:id="text_anno" promptText="Anno" />
                      </children>
                   </HBox>
                </children>
@@ -52,13 +62,13 @@
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Tempo dei lanci" />
-                              <ChoiceBox fx:id="choice_tLanci" prefWidth="150.0" />
+                              <ChoiceBox fx:id="choice_tLanci" prefWidth="150.0" style="-fx-background-color: d8c988;" />
                            </children>
                         </VBox>
                         <VBox prefHeight="47.0" prefWidth="147.0">
                            <children>
                               <Label />
-                              <CheckBox fx:id="choiceScarta" mnemonicParsing="false" onAction="#onScarta" prefHeight="17.0" prefWidth="140.0" text="Scarta gara peggiore?" />
+                              <CheckBox fx:id="choiceScarta" mnemonicParsing="false" prefHeight="17.0" prefWidth="140.0" text="Scarta gara peggiore?" />
                            </children>
                         </VBox>
                      </children>
@@ -69,8 +79,8 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <Button fx:id="button_conferma" mnemonicParsing="false" onAction="#onConferma" text="Conferma" />
-            <Button fx:id="button_annulla" mnemonicParsing="false" onAction="#onAnnulla" text="Annulla" />
+            <Button fx:id="button_conferma" mnemonicParsing="false" onAction="#onConferma" style="-fx-background-color: d8c988;" text="Conferma" />
+            <Button fx:id="button_annulla" mnemonicParsing="false" onAction="#onAnnulla" style="-fx-background-color: d8c988;" text="Annulla" />
          </children>
       </HBox>
    </children>

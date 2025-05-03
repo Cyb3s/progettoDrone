@@ -1,4 +1,4 @@
-package com.example.progetto_drone;
+package com.example.progetto_drone.altro;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
