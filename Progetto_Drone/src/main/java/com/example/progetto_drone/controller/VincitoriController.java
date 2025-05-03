@@ -49,6 +49,8 @@ public class VincitoriController {
         tbc_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbc_cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         tbc_puntiTotali.setCellValueFactory(new PropertyValueFactory<>("puntiTotali"));
+
+
     }
 
     @FXML

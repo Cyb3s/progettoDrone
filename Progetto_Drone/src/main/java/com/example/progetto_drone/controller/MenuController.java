@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class MenuController {
     @FXML
     private Button btn_nuovoTrofeo;
@@ -66,6 +68,19 @@ public class MenuController {
             // Collega la lista filtrata alla tabella
             tbw_tabella.setItems(listaFiltrata);
 
+        if (Trofei.listaTrofei.isEmpty()) {
+            Trofei.listaTrofei.add(new Trofeo(5, "Coppa Italia Droni", 2025, 3, 120, false));
+            Trofei.listaTrofei.add(new Trofeo(4, "Drone GP Roma",2025, 2, 90, true));
+            Trofei.listaTrofei.add(new Trofeo(6, "Trofeo delle Alpi",2025, 4, 150, false));
+            Trofei.listaTrofei.add(new Trofeo(3, "Coppa del Sud",2025, 2, 80, true));
+            Trofei.listaTrofei.add(new Trofeo(5, "Drone Race Napoli",2025, 3, 100, false));
+            Trofei.listaTrofei.add(new Trofeo(4, "Gran Premio Torino",2025, 3, 110, true));
+            Trofei.listaTrofei.add(new Trofeo(6, "Sky Challenge",2025, 4, 130, false));
+            Trofei.listaTrofei.add(new Trofeo(3, "Trofeo Milano",2025 , 2, 95, true));
+            Trofei.listaTrofei.add(new Trofeo(5, "Freccia del Nord",2025, 3, 120, false));
+            Trofei.listaTrofei.add(new Trofeo(6, "Drone Masters Cup",2025 , 5, 140, true));
+        }
+
         // Aggiungi un listener a TextField per la ricerca
         txf_ricerca.textProperty().addListener((obs, oldVal, newVal) -> {
             listaFiltrata.setPredicate(t -> {
@@ -75,7 +90,7 @@ public class MenuController {
                 boolean conclusi = ckb_conclusi.isSelected();
 
                 boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
                 boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
                 return matchNome && matchAnno && matchStato;
@@ -91,7 +106,7 @@ public class MenuController {
                 boolean conclusi = ckb_conclusi.isSelected();
 
                 boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
                 boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
                 return matchNome && matchAnno && matchStato;
@@ -107,7 +122,7 @@ public class MenuController {
                 boolean conclusi = ckb_conclusi.isSelected();
 
                 boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
                 boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
                 return matchNome && matchAnno && matchStato;
@@ -123,7 +138,7 @@ public class MenuController {
                 boolean conclusi = newVal;
 
                 boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);;
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
                 boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
                 return matchNome && matchAnno && matchStato;
@@ -154,7 +169,7 @@ public class MenuController {
 
     @FXML
     void onVisualizzaVincitori(ActionEvent event) {
-        ChangeWindow.changeWindow("vincitori.fxml","VIsualizza vincitori");
+        ChangeWindow.changeWindow("vincitori.fxml","Visualizza vincitori");
         Stage ss=(Stage) btn_visualizzaVincitori.getScene().getWindow();
         ss.close();
     }
