@@ -66,7 +66,69 @@ public class MenuController {
             // Collega la lista filtrata alla tabella
             tbw_tabella.setItems(listaFiltrata);
 
+        // Aggiungi un listener a TextField per la ricerca
+        txf_ricerca.textProperty().addListener((obs, oldVal, newVal) -> {
+            listaFiltrata.setPredicate(t -> {
+                String testo = newVal.toLowerCase().trim();
+                String anno = chb_anno.getValue();
+                boolean inCorso = ckb_inCorso.isSelected();
+                boolean conclusi = ckb_conclusi.isSelected();
 
+                boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+
+                return matchNome && matchAnno && matchStato;
+            });
+        });
+
+        // Aggiungi listener alla ChoiceBox (anno)
+        chb_anno.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            listaFiltrata.setPredicate(t -> {
+                String testo = txf_ricerca.getText().toLowerCase().trim();
+                String anno = newVal;
+                boolean inCorso = ckb_inCorso.isSelected();
+                boolean conclusi = ckb_conclusi.isSelected();
+
+                boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+
+                return matchNome && matchAnno && matchStato;
+            });
+        });
+
+        // Aggiungi listener alla CheckBox (in corso)
+        ckb_inCorso.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            listaFiltrata.setPredicate(t -> {
+                String testo = txf_ricerca.getText().toLowerCase().trim();
+                String anno = chb_anno.getValue();
+                boolean inCorso = newVal;
+                boolean conclusi = ckb_conclusi.isSelected();
+
+                boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);
+                boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+
+                return matchNome && matchAnno && matchStato;
+            });
+        });
+
+        // Aggiungi listener alla CheckBox (conclusi)
+        ckb_conclusi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            listaFiltrata.setPredicate(t -> {
+                String testo = txf_ricerca.getText().toLowerCase().trim();
+                String anno = chb_anno.getValue();
+                boolean inCorso = ckb_inCorso.isSelected();
+                boolean conclusi = newVal;
+
+                boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio().getYear()).equals(anno);;
+                boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+
+                return matchNome && matchAnno && matchStato;
+            });
+        });
     }
 
     @FXML
