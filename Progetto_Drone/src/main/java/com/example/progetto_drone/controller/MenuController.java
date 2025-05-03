@@ -144,6 +144,8 @@ public class MenuController {
                 return matchNome && matchAnno && matchStato;
             });
         });
+
+        //da aggiungere-> se clicco in una riga e il trofeo non è concluso lo porto al salvataggio dalla gara corrente
     }
 
     @FXML
