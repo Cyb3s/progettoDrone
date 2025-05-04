@@ -1,8 +1,12 @@
 package com.example.progetto_drone.controller;
 
 import com.example.progetto_drone.ChangeWindow;
+import com.example.progetto_drone.altro.Lancio;
+import com.example.progetto_drone.altro.Partecipante;
+import com.example.progetto_drone.altro.PartecipanteClassifica;
 import com.example.progetto_drone.altro.Trofeo;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,21 +16,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class VincitoriController {
     @FXML
     private Button btn_indietro;
 
     @FXML
-    private TableColumn<Trofeo, String> tbc_cognome;
+    private TableColumn<PartecipanteClassifica, String> tbc_cognome;
 
     @FXML
-    private TableColumn<Trofeo, String> tbc_nome;
+    private TableColumn<PartecipanteClassifica, String> tbc_nome;
 
     @FXML
-    private TableColumn<Trofeo, String> tbc_puntiTotali;
+    private TableColumn<PartecipanteClassifica, String> tbc_puntiTotali;
 
     @FXML
-    private TableView<Trofeo> tbw_tabella;
+    private TableView<PartecipanteClassifica> tbw_tabella;
 
     @FXML
     private TextField txf_primoClassificato;
@@ -39,14 +45,27 @@ public class VincitoriController {
 
     @FXML
     public void initialize(){
-        //settare le label primo, secondo e terzo con il nome e cognome del vincitore
-        //scrivere la classifica nella tabella
+        //creo una nuova lista ordinata
+        ArrayList<PartecipanteClassifica> ordinati = new ArrayList<>();
 
-        // Ordinare la lista in base ai punti (dal più alto al più basso)
-        /*classifica*/.sort((t1, t2) -> Integer.compare(t2.getPuntiTotali(), t1.getPuntiTotali()));
+        //aggiungere all'Array list i partecipanti con nome, cognome e puntiTotali
+        for (Partecipante p : ClassificaController.listaPartecipanti) {
+            //prende il lancio associato a ogni partecipante attraverso la lista lanciPerPartecipante
+            Lancio lancio = ClassificaController.lanciPerPartecipante.get(p);
 
-        // Popolare la TableView con la classifica completa
-        tbw_tabella.setItems(FXCollections.observableArrayList(/*classifica*/));
+            //se lancio il esiste, prende i punti convertendoli da String a int, senò imposta punti = 0
+            int punti = (lancio != null) ? Integer.parseInt(lancio.getPunti()) : 0;
+
+            //aggiungo alla lista creata il partecipante che metterò poi nella tabella
+            ordinati.add(new PartecipanteClassifica(p.getNome(), p.getCognome(), punti));
+        }
+
+        //ordino la lista dal più grande al più piccolo
+        ordinati.sort((a, b) -> Integer.compare(b.getPuntiTotali(), a.getPuntiTotali()));
+
+        //creo un observableList dopo gli passo classifica
+        ObservableList<PartecipanteClassifica> classifica = FXCollections.observableArrayList(ordinati);
+        tbw_tabella.setItems(classifica);
 
         // Configurare le colonne della TableView
         tbc_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -54,16 +73,15 @@ public class VincitoriController {
         tbc_puntiTotali.setCellValueFactory(new PropertyValueFactory<>("puntiTotali"));
 
         // visualizzare il primo, secondo e terzo classificato
-        if (!/*classifica*/.isEmpty()) {
-            txf_primoClassificato.setText(/*classifica*/.get(0).getNome() + " " + /*classifica*/.get(0).getCognome());
+        if (!ClassificaController.listaPartecipanti.isEmpty()) {
+            txf_primoClassificato.setText(ClassificaController.listaPartecipanti.get(0).getNome() + " " + ClassificaController.listaPartecipanti.get(0).getCognome());
         }
-        if (partecipanti.size() > 1) {
-            txf_secondoClassificato.setText(/*classifica*/.get(1).getNome() + " " + /*classifica*/.get(1).getCognome());
+        if (ClassificaController.listaPartecipanti.size() > 1) {
+            txf_secondoClassificato.setText(ClassificaController.listaPartecipanti.get(1).getNome() + " " + ClassificaController.listaPartecipanti.get(1).getCognome());
         }
-        if (partecipanti.size() > 2) {
-            txf_terzoClassificato.setText(/*classifica*/.get(2).getNome() + " " + /*classifica*/.get(2).getCognome());
+        if (ClassificaController.listaPartecipanti.size() > 2) {
+            txf_terzoClassificato.setText(ClassificaController.listaPartecipanti.get(2).getNome() + " " + ClassificaController.listaPartecipanti.get(2).getCognome());
         }
-
     }
 
     @FXML

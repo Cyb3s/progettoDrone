@@ -12,6 +12,13 @@ public class Lancio {
     private String tempo ="";
     private int numLanci = 4;
 
+    public int getNumLanci() {
+        return numLanci;
+    }
+
+    public void setNumLanci(int numLanci) {
+        this.numLanci = numLanci;
+    }
 
     public Partecipante getPartecipante() {
         return partecipante;
@@ -19,14 +26,6 @@ public class Lancio {
 
     public void setPartecipante(Partecipante partecipante) {
         this.partecipante = partecipante;
-    }
-
-    public List<Long> getTempiLanci() {
-        return tempiLanci;
-    }
-
-    public void setTempiLanci(List<Long> tempiLanci) {
-        this.tempiLanci = tempiLanci;
     }
 
     public int getPenalita() {
@@ -45,20 +44,20 @@ public class Lancio {
         this.punti = punti;
     }
 
+    public List<Long> getTempiLanci() {
+        return tempiLanci;
+    }
+
+    public void setTempiLanci(List<Long> tempiLanci) {
+        this.tempiLanci = tempiLanci;
+    }
+
     public String getTempo() {
         return tempo;
     }
 
     public void setTempo(String tempo) {
         this.tempo = tempo;
-    }
-
-    public int getNumLanci() {
-        return numLanci;
-    }
-
-    public void setNumLanci(int numLanci) {
-        this.numLanci = numLanci;
     }
 
     public void aggiungiTempo(long tempoMillis) {
@@ -70,7 +69,7 @@ public class Lancio {
         }
     }
 
-    private void aggiornaPunteggio() {
+    public void aggiornaPunteggio() {
         List<Integer> punteggi = new ArrayList<>();
         for (long tempo : tempiLanci) {
             int secondi = (int) (tempo / 1000);
@@ -86,14 +85,11 @@ public class Lancio {
         punti=String.valueOf(totale);
     }
 
-    private String formattaTempo(long tempoMillis) {
+    public String formattaTempo(long tempoMillis) {
         long secondi = tempoMillis / 1000;
         long minuti = secondi / 60;
         secondi = secondi % 60;
         long millisecondi = tempoMillis % 1000;
         return String.format("%02d:%02d.%03d", minuti, secondi, millisecondi);
     }
-
-
-
 }

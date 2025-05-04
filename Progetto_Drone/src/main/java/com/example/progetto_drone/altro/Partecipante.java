@@ -1,7 +1,7 @@
 package com.example.progetto_drone.altro;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Partecipante {
     private String nome;
@@ -27,4 +27,5 @@ public class Partecipante {
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
+
 }
