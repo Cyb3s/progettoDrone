@@ -100,37 +100,40 @@ public class MenuController {
             });
 
             // Aggiungi listener alla CheckBox (in corso)
-            ckb_inCorso.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                listaFiltrata.setPredicate(t -> {
-                    String testo = txf_ricerca.getText().toLowerCase().trim();
-                    String anno = chb_anno.getValue();
-                    boolean inCorso = newVal;
-                    boolean conclusi = ckb_conclusi.isSelected();
+            if(ckb_inCorso != null) {
+                ckb_inCorso.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    listaFiltrata.setPredicate(t -> {
+                        String testo = txf_ricerca.getText().toLowerCase().trim();
+                        String anno = chb_anno.getValue();
+                        boolean inCorso = newVal;
+                        boolean conclusi = ckb_conclusi.isSelected();
 
-                    boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                    boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
-                    boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+                        boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                        boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
+                        boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
-                    return matchNome && matchAnno && matchStato;
+                        return matchNome && matchAnno && matchStato;
+                    });
                 });
-            });
+            }
 
             // Aggiungi listener alla CheckBox (conclusi)
-            ckb_conclusi.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                listaFiltrata.setPredicate(t -> {
-                    String testo = txf_ricerca.getText().toLowerCase().trim();
-                    String anno = chb_anno.getValue();
-                    boolean inCorso = ckb_inCorso.isSelected();
-                    boolean conclusi = newVal;
+            if(ckb_conclusi != null) {
+                ckb_conclusi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    listaFiltrata.setPredicate(t -> {
+                        String testo = txf_ricerca.getText().toLowerCase().trim();
+                        String anno = chb_anno.getValue();
+                        boolean inCorso = ckb_inCorso.isSelected();
+                        boolean conclusi = newVal;
 
-                    boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
-                    boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
-                    boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
+                        boolean matchNome = testo.isEmpty() || t.getNomeTrofeo().toLowerCase().contains(testo);
+                        boolean matchAnno = "Tutti".equals(anno) || String.valueOf(t.getDataInizio()).equals(anno);
+                        boolean matchStato = (!inCorso && !conclusi) || (inCorso ^ conclusi ? (inCorso == t.isInCorso()) : true);
 
-                    return matchNome && matchAnno && matchStato;
+                        return matchNome && matchAnno && matchStato;
+                    });
                 });
-            });
-
+            }
             // Se clicco un torneo non concluso mi manda alla prossima gara del trofeo
             tbw_tabella.setOnMouseClicked(event -> {
                 // Verifica se una riga è selezionata
