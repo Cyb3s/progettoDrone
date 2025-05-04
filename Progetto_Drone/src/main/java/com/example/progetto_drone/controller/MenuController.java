@@ -61,24 +61,11 @@ public class MenuController {
             /*settare la tabella col binding dinamico*/
 
             // Configura le colonne della tabella
-            tbc_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-            tbc_data.setCellValueFactory(new PropertyValueFactory<>("data"));
+            tbc_nome.setCellValueFactory(new PropertyValueFactory<>("nomeTrofeo"));
+            tbc_data.setCellValueFactory(new PropertyValueFactory<>("dataInizio"));
 
             // Collega la lista filtrata alla tabella
             tbw_tabella.setItems(listaFiltrata);
-
-            /*if (Trofei.listaTrofei.isEmpty()) {
-                Trofei.listaTrofei.add(new Trofeo(5, "Coppa Italia Droni", 2025, 3, 120, false));
-                Trofei.listaTrofei.add(new Trofeo(4, "Drone GP Roma",2025, 2, 90, true));
-                Trofei.listaTrofei.add(new Trofeo(6, "Trofeo delle Alpi",2025, 4, 150, false));
-                Trofei.listaTrofei.add(new Trofeo(3, "Coppa del Sud",2025, 2, 80, true));
-                Trofei.listaTrofei.add(new Trofeo(5, "Drone Race Napoli",2025, 3, 100, false));
-                Trofei.listaTrofei.add(new Trofeo(4, "Gran Premio Torino",2025, 3, 110, true));
-                Trofei.listaTrofei.add(new Trofeo(6, "Sky Challenge",2025, 4, 130, false));
-                Trofei.listaTrofei.add(new Trofeo(3, "Trofeo Milano",2025 , 2, 95, true));
-                Trofei.listaTrofei.add(new Trofeo(5, "Freccia del Nord",2025, 3, 120, false));
-                Trofei.listaTrofei.add(new Trofeo(6, "Drone Masters Cup",2025 , 5, 140, true));
-            }*/
 
             // Aggiungi un listener a TextField per la ricerca
             txf_ricerca.textProperty().addListener((obs, oldVal, newVal) -> {

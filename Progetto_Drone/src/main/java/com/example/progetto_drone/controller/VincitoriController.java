@@ -61,7 +61,7 @@ public class VincitoriController {
         }
 
         //ordino la lista dal più grande al più piccolo
-        ordinati.sort((a, b) -> Integer.compare(b.getPuntiTotali(), a.getPuntiTotali()));
+        ordinati.sort((p1, p2) -> Integer.compare(p2.getPuntiTotali(), p1.getPuntiTotali()));
 
         //creo un observableList dopo gli passo classifica
         ObservableList<PartecipanteClassifica> classifica = FXCollections.observableArrayList(ordinati);
