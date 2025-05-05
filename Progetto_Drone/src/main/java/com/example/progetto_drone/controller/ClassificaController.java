@@ -5,6 +5,7 @@ import com.example.progetto_drone.altro.Lancio;
 import com.example.progetto_drone.altro.Partecipante;
 import com.example.progetto_drone.altro.Trofeo;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ public class ClassificaController {
     private Label lbl_titolo;
 
     @FXML
-    private TableColumn<Trofeo, String> tbc_nome;
+    private TableColumn<Partecipante, String> tbc_nome;
 
     @FXML
     private TableColumn<Trofeo, String> tbc_numLanci;
@@ -67,45 +68,48 @@ public class ClassificaController {
     public void initialize() {
         tableView.setEditable(true);
 
-        tbc_nome.setCellValueFactory(new PropertyValueFactory<Trofeo,String>("nomeTrofeo"));
-        tbc_numLanci.setCellValueFactory(new PropertyValueFactory<Trofeo,String>("nLanci"));
-        tbc_penalita.setCellValueFactory(new PropertyValueFactory<Lancio,String>("penalita"));
-        tbc_punti.setCellValueFactory(new PropertyValueFactory<Lancio,String>("punti"));
-        tbc_tempo.setCellValueFactory(new PropertyValueFactory<Lancio,String>("tempo"));
+        tbc_nome.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getNome() + " " + cellData.getValue().getCognome()));
 
-        tableView.setItems(listaPartecipanti);
-
+        tbc_tempo.setCellValueFactory(cellData -> {
+            Lancio lancio = lanciPerPartecipante.get(cellData.getValue());
+            return new SimpleStringProperty(lancio != null ? lancio.getTempo() : "");
+        });
         tbc_tempo.setCellFactory(TextFieldTableCell.forTableColumn());
         tbc_tempo.setOnEditCommit(event -> {
-            Partecipante partecipante = event.getRowValue().getPartecipante();
-            Lancio lancio = lanciPerPartecipante.get(partecipante);
+            Partecipante p = event.getRowValue().getPartecipante();
+            Lancio lancio = lanciPerPartecipante.get(p);
             if (lancio != null) {
                 lancio.setTempo(event.getNewValue());
                 tableView.refresh();
             }
         });
 
+        tbc_penalita.setCellValueFactory(cellData -> {
+            Lancio lancio = lanciPerPartecipante.get(cellData.getValue());
+            return new SimpleStringProperty(String.valueOf(lancio != null ? lancio.getPenalita() : 0));
+        });
         tbc_penalita.setCellFactory(TextFieldTableCell.forTableColumn());
         tbc_penalita.setOnEditCommit(event -> {
-            Partecipante partecipante = event.getRowValue().getPartecipante();
-            Lancio lancio = lanciPerPartecipante.get(partecipante);
+            Partecipante p = event.getRowValue().getPartecipante();
+            Lancio lancio = lanciPerPartecipante.get(p);
             if (lancio != null) {
                 try {
-                    int penalita = Integer.parseInt(event.getNewValue());
-                    lancio.setPenalita(penalita);
+                    lancio.setPenalita(Integer.parseInt(event.getNewValue()));
+                    lancio.aggiornaPunteggio();
                     tableView.refresh();
                 } catch (NumberFormatException e) {
-                    System.err.println("Valore penalità non valido: " + event.getNewValue());
+                    System.err.println("Penalità non valida: " + event.getNewValue());
                 }
             }
         });
 
-        timer = new AnimationTimer() {            @Override
-        public void handle(long now) {
-            long milliTrascorsi = System.currentTimeMillis() - tempoIniziale;
-            lbl_titolo.setText(formattaTempo(milliTrascorsi));
-        }
-        };
+        tbc_punti.setCellValueFactory(cellData -> {
+            Lancio lancio = lanciPerPartecipante.get(cellData.getValue());
+            return new SimpleStringProperty(lancio != null ? lancio.getPunti() : "0");
+        });
+
+        tableView.setItems(listaPartecipanti);
 
         Partecipante p1 = new Partecipante("Luca", "Bianchi");
         Partecipante p2 = new Partecipante("Giulia", "Verdi");
@@ -122,7 +126,16 @@ public class ClassificaController {
         lanciPerPartecipante.put(p4, new Lancio());
         lanciPerPartecipante.put(p5, new Lancio());
         lanciPerPartecipante.put(p6, new Lancio());
+
+        timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                long milliTrascorsi = System.currentTimeMillis() - tempoIniziale;
+                lbl_titolo.setText(formattaTempo(milliTrascorsi));
+            }
+        };
     }
+
 
     @FXML
     void onAvviaCrnm(ActionEvent event) {
@@ -138,6 +151,16 @@ public class ClassificaController {
         if (cronometroAttivo) {
             timer.stop();
             cronometroAttivo = false;
+
+            Partecipante partecipante = tableView.getSelectionModel().getSelectedItem();
+            if (partecipante != null) {
+                Lancio lancio = lanciPerPartecipante.get(partecipante);
+                if (lancio != null) {
+                    long tempoTrascorso = System.currentTimeMillis() - tempoIniziale;
+                    lancio.aggiungiTempo(tempoTrascorso);
+                    tableView.refresh();
+                }
+            }
         }
     }
 
@@ -146,12 +169,12 @@ public class ClassificaController {
         Partecipante p = tableView.getSelectionModel().getSelectedItem();
         if (p != null) {
             Lancio lancio = lanciPerPartecipante.get(p);
-            lancio.aggiungiTempo(System.currentTimeMillis() - tempoIniziale);
-
+            long tempoMillis = System.currentTimeMillis() - tempoIniziale;
+            lancio.aggiungiTempo(tempoMillis);
             tableView.refresh();
         }
-
     }
+
 
     @FXML
     void onTornaHome(ActionEvent event) {

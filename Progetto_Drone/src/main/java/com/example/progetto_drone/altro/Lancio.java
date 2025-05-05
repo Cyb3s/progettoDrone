@@ -12,6 +12,15 @@ public class Lancio {
     private String tempo ="";
     private int numLanci = 4;
 
+    public Lancio() {
+        this.partecipante = partecipante;
+        this.tempiLanci = tempiLanci;
+        this.penalita = penalita;
+        this.punti = punti;
+        this.tempo = tempo;
+        this.numLanci = 4;
+    }
+
     public int getNumLanci() {
         return numLanci;
     }
@@ -58,6 +67,28 @@ public class Lancio {
 
     public void setTempo(String tempo) {
         this.tempo = tempo;
+        try {
+            long tempoMillis = convertiTempoInMillis(tempo);
+            if (numLanci > 0) {
+                tempiLanci.add(tempoMillis);
+                numLanci--;
+            } else if (!tempiLanci.isEmpty()) {
+                tempiLanci.set(tempiLanci.size() - 1, tempoMillis);
+            }
+            aggiornaPunteggio();
+        } catch (Exception e) {
+            System.err.println("Errore nel parsing del tempo: " + tempo);
+        }
+    }
+
+
+    private long convertiTempoInMillis(String tempo) {
+        String[] parti = tempo.split("[:\\.]");
+        if (parti.length != 3) throw new IllegalArgumentException("Formato tempo non valido: " + tempo);
+        long minuti = Long.parseLong(parti[0]);
+        long secondi = Long.parseLong(parti[1]);
+        long millisecondi = Long.parseLong(parti[2]);
+        return (minuti * 60 + secondi) * 1000 + millisecondi;
     }
 
     public void aggiungiTempo(long tempoMillis) {
